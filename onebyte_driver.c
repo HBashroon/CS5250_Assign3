@@ -51,7 +51,12 @@ ssize_t onebyte_read(struct file *filep, char *buf, size_t count, loff_t *f_pos)
 
 //ONEBYTE_WRITE
 ssize_t onebyte_write(struct file *filep, const char *buf, size_t count, loff_t *f_pos){
-
+	raw_copy_from_user(onebyte_data, buf,1);
+	if(count==1)
+		return 1;
+	
+	else
+		return -ENOSPC;
 }
 
 //ONEBYTE_INIT
